@@ -1,17 +1,26 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
-import animeContext from "../../context/AnimeContext";
+import { useNavigate } from "react-router-dom";
+import AnimeContext from "../../context/AnimeContext";
+import AlertContext from "../../context/alert/AlertContext";
 
 const Home = () => {
+  const navigate = useNavigate();
   const [text, setText] = useState("");
-  const AnimeContext = useContext(animeContext);
+  const animeContext = useContext(AnimeContext);
+  const alertContext = useContext(AlertContext);
 
   const onSearch = (e) => {
     setText(e.target.value);
   };
 
   const searchAnime = (e) => {
-    AnimeContext.setAnimeList(text);
+    e.preventDefault();
+    if (text === "") {
+      alertContext.setAlert("  Please enter an input", "danger");
+    } else {
+      animeContext.setAnimeList(text);
+      navigate("/list");
+    }
   };
 
   return (
@@ -28,7 +37,7 @@ const Home = () => {
           onChange={onSearch}
         />
         <button className='input-group-text' onClick={searchAnime}>
-          <Link to='/list' className='bi bi-search'></Link>
+          <i className='bi bi-search' />
         </button>
       </div>
     </div>

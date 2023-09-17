@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Episodes from "../Videos/Episodes";
 import Spinner from "../layout/Spinner";
@@ -13,7 +13,7 @@ const AnimeInfo = () => {
 
   useEffect(() => {
     getAnime(id);
-    // es-lint-disable-next-line
+    // eslint-disable-next-line
   }, []);
 
   if (loading) {
@@ -51,9 +51,13 @@ const AnimeInfo = () => {
         <hr />
         <h5>Episodes</h5>
         <div className={episodeStyle}>
-          {animeEpisodes.map((episode) => (
-            <Episodes key={episode.number} episode={episode} />
-          ))}
+          {Array.isArray(animeEpisodes) ? (
+            animeEpisodes.map((episode) => (
+              <Episodes key={episode.number} episode={episode} />
+            ))
+          ) : (
+            <p>No Episodes Available...</p>
+          )}
         </div>
       </div>
     </div>

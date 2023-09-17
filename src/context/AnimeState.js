@@ -4,11 +4,10 @@ import AnimeContext from "./AnimeContext";
 import AnimeReducer from "./animeReducer";
 import {
   GET_ANIME,
+  SET_ANIME_EPISODES,
   SET_ANIME_LIST,
-  SEARCH_ANIME,
   SET_LOADING,
-  SET_QUERY,
-} from "../Types";
+} from "./Types";
 
 const AnimeState = (props) => {
   const initialState = {
@@ -33,6 +32,8 @@ const AnimeState = (props) => {
         type: GET_ANIME,
         payload: res.data,
       });
+
+      setAnimeEpisodes(res.data.episodes);
     } catch (err) {
       console.log(err.response.statusText);
     }
@@ -55,6 +56,15 @@ const AnimeState = (props) => {
     }
   };
 
+  const setAnimeEpisodes = (episodes) => {
+    setLoading();
+
+    dispatch({
+      type: SET_ANIME_EPISODES,
+      payload: episodes,
+    });
+  };
+
   const setLoading = () => dispatch({ type: SET_LOADING });
 
   return (
@@ -67,6 +77,7 @@ const AnimeState = (props) => {
         loading: state.loading,
         getAnime,
         setAnimeList,
+        setAnimeEpisodes,
       }}
     >
       {props.children}

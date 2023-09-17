@@ -3,16 +3,17 @@ import { Link } from "react-router-dom";
 import animeContext from "../../context/AnimeContext";
 
 const Searchbar = () => {
-  const [text, setText] = useState("");
+  const [input, setInput] = useState("");
   const AnimeContext = useContext(animeContext);
 
   const onSearch = (e) => {
-    setText(e.target.value);
+    setInput(e.target.value);
   };
 
   const searchAnime = (e) => {
     e.preventDefault();
-    AnimeContext.setAnimeList(text);
+    AnimeContext.setAnimeList(input);
+    setInput("");
   };
 
   return (
@@ -23,9 +24,12 @@ const Searchbar = () => {
         placeholder='Search anime'
         aria-label='Search'
         onChange={onSearch}
+        value={input}
       />
       <button className='btn btn-outline-success' onClick={searchAnime}>
-        <Link to='/list'>Search</Link>
+        <Link to='/list' style={{ textDecoration: "none" }}>
+          Search
+        </Link>
       </button>
     </form>
   );
