@@ -27,8 +27,6 @@ const Searchbar = () => {
     searchText(text);
   };
 
-  console.log(data);
-
   return (
     <form className='d-flex' role='search'>
       <input

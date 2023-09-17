@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Videos from "./Videos";
+import Spinner from "../layout/Spinner";
 
 const VideoInfo = () => {
   const [videos, setVideo] = useState([]);
   const [episodes, setEpisodes] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getData();
@@ -14,14 +16,20 @@ const VideoInfo = () => {
   const url = "https://api.consumet.org/anime/gogoanime/info/spy-x-family";
 
   const getData = async () => {
+    setLoading(true);
     try {
       const res = await axios.get(url);
       setVideo(res.data);
       setEpisodes(res.data.episodes);
+      setLoading(false);
     } catch (err) {
       console.log(err.response.statusText);
     }
   };
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <div>
@@ -30,7 +38,7 @@ const VideoInfo = () => {
           <div className='col-xxl-2 clearfix'>
             <img
               src={videos.image}
-              className='mx-auto d-block'
+              className='mx-auto d-block m-4'
               style={imageStyle}
               alt='anime_image'
             ></img>
