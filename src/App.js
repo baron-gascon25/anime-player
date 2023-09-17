@@ -21,7 +21,7 @@ function App() {
             <Routes>
               <Route path='/' element={<Home />} />
               <Route path='/list' element={<AnimeList />} />
-              <Route path='/info' element={<AnimeInfo />} />
+              <Route path='/info/:id' element={<AnimeInfo />} />
             </Routes>
           </div>
         </Fragment>

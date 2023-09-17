@@ -25,7 +25,7 @@ const Searchbar = () => {
         onChange={onSearch}
       />
       <button className='btn btn-outline-success' onClick={searchAnime}>
-        <Link to='/info'>Search</Link>
+        <Link to='/list'>Search</Link>
       </button>
     </form>
   );

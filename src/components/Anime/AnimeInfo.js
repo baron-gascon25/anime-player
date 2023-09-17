@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import Episodes from "../Videos/Episodes";
 import Spinner from "../layout/Spinner";
 import AnimeContext from "../../context/AnimeContext";
@@ -8,8 +9,10 @@ const AnimeInfo = () => {
 
   const { loading, animeInfo, animeEpisodes, getAnime } = animeContext;
 
+  const { id } = useParams();
+
   useEffect(() => {
-    getAnime("spy-x-family");
+    getAnime(id);
     // es-lint-disable-next-line
   }, []);
 
