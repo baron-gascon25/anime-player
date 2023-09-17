@@ -4,15 +4,15 @@ import { Link } from "react-router-dom";
 const Anime = ({ animes: { id, title, image } }) => {
   console.log(id);
   return (
-    <div className='card' style={{ width: "250px" }}>
+    <div className='card m-3' style={{ width: "250px" }}>
       <div className='card-body'>
-        <img
-          src={image}
-          style={imageStyle}
-          alt={id}
-          className='card-image-top'
-        />
-        <Link to={`/info/${id}`}>
+        <Link to={`/info/${id}`} style={{ textDecoration: "none" }}>
+          <img
+            src={image}
+            style={imageStyle}
+            alt={id}
+            className='card-image-top'
+          />
           <p className='card-title text-center'>{title}</p>
         </Link>
       </div>
