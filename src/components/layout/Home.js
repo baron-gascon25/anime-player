@@ -1,6 +1,19 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import animeContext from "../../context/AnimeContext";
 
 const Home = () => {
+  const [text, setText] = useState("");
+  const AnimeContext = useContext(animeContext);
+
+  const onSearch = (e) => {
+    setText(e.target.value);
+  };
+
+  const searchAnime = (e) => {
+    AnimeContext.setAnimeList(text);
+  };
+
   return (
     <div className='m-5'>
       <h3 className='text-center lh-lg'>
@@ -12,8 +25,11 @@ const Home = () => {
           type='search'
           placeholder='Search anime'
           aria-label='Search'
+          onChange={onSearch}
         />
-        <i className='input-group-text bi bi-search'></i>
+        <button className='input-group-text' onClick={searchAnime}>
+          <Link to='/list' className='bi bi-search'></Link>
+        </button>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Searchbar from "./Searchbar";
 
 const Navbar = () => {
@@ -9,9 +10,7 @@ const Navbar = () => {
       style={{ marginBottom: "1.5rem" }}
     >
       <div className='container container-fluid'>
-        <a className='navbar-brand mb-0 h1' href='#'>
-          Anime Player App
-        </a>
+        <a className='navbar-brand mb-0 h1'>AniPlayer</a>
         <button
           className='navbar-toggler'
           type='button'
@@ -26,14 +25,14 @@ const Navbar = () => {
         <div className='collapse navbar-collapse' id='navbarSupportedContent'>
           <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
             <li className='nav-item'>
-              <a className='nav-link active' aria-current='page' href='#'>
+              <Link to='/' className='nav-link active' aria-current='page'>
                 Home
-              </a>
+              </Link>
             </li>
             <li className='nav-item'>
-              <a className='nav-link' href='#'>
-                Link
-              </a>
+              <Link to='/list' className='nav-link active'>
+                Anime
+              </Link>
             </li>
           </ul>
           <Searchbar />

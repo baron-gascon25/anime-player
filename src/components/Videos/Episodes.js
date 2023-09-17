@@ -1,6 +1,6 @@
 import React from "react";
 
-const Videos = ({ episode: { url, id } }) => {
+const Episodes = ({ episode: { url, id } }) => {
   return (
     <div>
       <div>
@@ -12,4 +12,4 @@ const Videos = ({ episode: { url, id } }) => {
   );
 };
 
-export default Videos;
+export default Episodes;

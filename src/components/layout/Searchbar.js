@@ -1,30 +1,18 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import animeContext from "../../context/AnimeContext";
 
 const Searchbar = () => {
   const [text, setText] = useState("");
-  const [data, setData] = useState([]);
-  const [results, setResult] = useState([]);
+  const AnimeContext = useContext(animeContext);
 
   const onSearch = (e) => {
     setText(e.target.value);
   };
 
-  const searchText = async (query) => {
-    try {
-      const res = await axios.get(
-        `https://api.consumet.org/anime/gogoanime/${query}`
-      );
-      setData(res.data);
-      setResult(res.data.results);
-    } catch (err) {
-      console.log(err.response.statusText);
-    }
-  };
-
   const searchAnime = (e) => {
     e.preventDefault();
-    searchText(text);
+    AnimeContext.setAnimeList(text);
   };
 
   return (
@@ -36,12 +24,8 @@ const Searchbar = () => {
         aria-label='Search'
         onChange={onSearch}
       />
-      <button
-        className='btn btn-outline-success'
-        type='submit'
-        onClick={searchAnime}
-      >
-        Search
+      <button className='btn btn-outline-success' onClick={searchAnime}>
+        <Link to='/info'>Search</Link>
       </button>
     </form>
   );
