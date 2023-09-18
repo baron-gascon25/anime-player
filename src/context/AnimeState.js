@@ -4,7 +4,8 @@ import AnimeContext from "./AnimeContext";
 import AnimeReducer from "./animeReducer";
 import {
   GET_ANIME,
-  SET_ANIME_EPISODES,
+  GET_ANIME_EPISODES,
+  SET_ANIME_EPISODE,
   SET_ANIME_LIST,
   SET_LOADING,
 } from "./Types";
@@ -15,6 +16,8 @@ const AnimeState = (props) => {
     animeInfo: [],
     animeList: [],
     animeEpisodes: {},
+    animeEpisodesList: [],
+    animeEpisodeUrl: [],
     loading: false,
   };
 
@@ -33,7 +36,7 @@ const AnimeState = (props) => {
         payload: res.data,
       });
 
-      setAnimeEpisodes(res.data.episodes);
+      getAnimeEpisodes(res.data.episodes);
     } catch (err) {
       console.log(err.response.statusText);
     }
@@ -56,13 +59,30 @@ const AnimeState = (props) => {
     }
   };
 
-  const setAnimeEpisodes = (episodes) => {
+  const getAnimeEpisodes = (episodes) => {
     setLoading();
 
     dispatch({
-      type: SET_ANIME_EPISODES,
+      type: GET_ANIME_EPISODES,
       payload: episodes,
     });
+  };
+
+  const setAnimeEpisode = async (query) => {
+    setLoading();
+
+    try {
+      const res = await axios.get(
+        `https://api.consumet.org/anime/gogoanime/watch/${query}?server=gogocdn`
+      );
+
+      dispatch({
+        type: SET_ANIME_EPISODE,
+        payload: res.data,
+      });
+    } catch (err) {
+      console.log(err.response.statusText);
+    }
   };
 
   const setLoading = () => dispatch({ type: SET_LOADING });
@@ -74,10 +94,13 @@ const AnimeState = (props) => {
         animeInfo: state.animeInfo,
         animeList: state.animeList,
         animeEpisodes: state.animeEpisodes,
+        animeEpisodeUrl: state.animeEpisodeUrl,
+        animeEpisodesList: state.animeEpisodesList,
         loading: state.loading,
         getAnime,
         setAnimeList,
-        setAnimeEpisodes,
+        setAnimeEpisode,
+        getAnimeEpisodes,
       }}
     >
       {props.children}

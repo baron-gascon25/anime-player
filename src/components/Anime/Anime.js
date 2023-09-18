@@ -2,11 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Anime = ({ animes: { id, title, image } }) => {
-  console.log(id);
   return (
-    <div className='card m-3' style={{ width: "250px" }}>
+    <div className='card m-3' style={{ width: "260px" }}>
       <div className='card-body'>
-        <Link to={`/info/${id}`} style={{ textDecoration: "none" }}>
+        <Link to={`/info/${id}`} className='text-decoration-none'>
           <img
             src={image}
             style={imageStyle}

@@ -1,12 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const Episodes = ({ episode: { url, id } }) => {
+const Episodes = ({ episode: { id } }) => {
   return (
     <div>
       <div>
-        <a href={`${url}`} target='_blank'>
+        <Link to={`/episode/${id}`}>
           <h6>{id}</h6>
-        </a>
+        </Link>
       </div>
     </div>
   );

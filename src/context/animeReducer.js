@@ -2,7 +2,8 @@ import {
   GET_ANIME,
   SET_ANIME_LIST,
   SET_LOADING,
-  SET_ANIME_EPISODES,
+  SET_ANIME_EPISODE,
+  GET_ANIME_EPISODES,
 } from "./Types";
 
 const animeReducer = (state, action) => {
@@ -13,10 +14,16 @@ const animeReducer = (state, action) => {
         animeInfo: action.payload,
         loading: false,
       };
-    case SET_ANIME_EPISODES:
+    case GET_ANIME_EPISODES:
       return {
         ...state,
         animeEpisodes: action.payload,
+        loading: false,
+      };
+    case SET_ANIME_EPISODE:
+      return {
+        ...state,
+        animeEpisodeUrl: action.payload.sources,
         loading: false,
       };
     case SET_ANIME_LIST:
