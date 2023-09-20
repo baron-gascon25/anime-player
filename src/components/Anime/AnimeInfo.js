@@ -7,14 +7,16 @@ import AnimeContext from "../../context/AnimeContext";
 const AnimeInfo = () => {
   const animeContext = useContext(AnimeContext);
 
-  const { loading, animeInfo, animeEpisodes, getAnime } = animeContext;
+  const { loading, animeInfo, animeEpisodes, getAnime, clearAnimeUrl } =
+    animeContext;
 
   const { id } = useParams();
 
   useEffect(() => {
     getAnime(id);
+    clearAnimeUrl();
     // eslint-disable-next-line
-  }, []);
+  }, [id]);
 
   if (loading) {
     return <Spinner />;

@@ -7,17 +7,20 @@ import {
   GET_ANIME_EPISODES,
   SET_ANIME_EPISODE,
   SET_ANIME_LIST,
+  SET_URL,
+  CLEAR_URL,
+  CLEAR_ANIME_URL,
   SET_LOADING,
 } from "./Types";
 
 const AnimeState = (props) => {
   const initialState = {
-    anime: [],
     animeInfo: [],
     animeList: [],
     animeEpisodes: {},
-    animeEpisodesList: [],
     animeEpisodeUrl: [],
+    animeUrl: "",
+    animeUrlList: {},
     loading: false,
   };
 
@@ -81,8 +84,29 @@ const AnimeState = (props) => {
         payload: res.data,
       });
     } catch (err) {
-      console.log(err.response.statusText);
+      console.log(err.response);
     }
+  };
+
+  const setAnimeUrl = (url) => {
+    dispatch({
+      type: SET_URL,
+      payload: url,
+    });
+  };
+
+  const clearUrl = () => {
+    dispatch({
+      type: CLEAR_ANIME_URL,
+    });
+  };
+
+  const clearAnimeUrl = (url) => {
+    clearUrl();
+    dispatch({
+      type: CLEAR_URL,
+      payload: url,
+    });
   };
 
   const setLoading = () => dispatch({ type: SET_LOADING });
@@ -95,10 +119,12 @@ const AnimeState = (props) => {
         animeList: state.animeList,
         animeEpisodes: state.animeEpisodes,
         animeEpisodeUrl: state.animeEpisodeUrl,
-        animeEpisodesList: state.animeEpisodesList,
+        animeUrl: state.animeUrl,
         loading: state.loading,
         getAnime,
+        setAnimeUrl,
         setAnimeList,
+        clearAnimeUrl,
         setAnimeEpisode,
         getAnimeEpisodes,
       }}

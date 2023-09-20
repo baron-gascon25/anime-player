@@ -1,9 +1,12 @@
 import {
   GET_ANIME,
+  CLEAR_URL,
   SET_ANIME_LIST,
   SET_LOADING,
+  SET_URL,
   SET_ANIME_EPISODE,
   GET_ANIME_EPISODES,
+  CLEAR_ANIME_URL,
 } from "./Types";
 
 const animeReducer = (state, action) => {
@@ -36,6 +39,21 @@ const animeReducer = (state, action) => {
       return {
         ...state,
         loading: true,
+      };
+    case SET_URL:
+      return {
+        ...state,
+        animeUrl: action.payload.map((link) => link.url),
+      };
+    case CLEAR_URL:
+      return {
+        ...state,
+        animeUrl: [],
+      };
+    case CLEAR_ANIME_URL:
+      return {
+        ...state,
+        animeEpisodeUrl: [],
       };
     default:
       return state;

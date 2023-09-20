@@ -8,32 +8,46 @@ const Episode = () => {
   const animeContext = useContext(AnimeContext);
   const [videoUrl, setVideoUrl] = useState("");
 
-  const { setAnimeEpisode, animeEpisodeUrl, animeEpisodesList, loading } =
-    animeContext;
+  const {
+    animeEpisodeUrl,
+    loading,
+    animeUrl,
+    setAnimeUrl,
+    clearAnimeUrl,
+    setAnimeEpisode,
+  } = animeContext;
 
   const { id } = useParams();
 
+  // const loadUrl = () => {
+
+  // };
+
   useEffect(() => {
     setAnimeEpisode(id);
-    animeEpisodeUrl.map(
-      (link) => link.quality === "default" && setVideoUrl(link.url)
-    );
+
+    //loadUrl();
     // eslint-disable-next-line
-  }, [videoUrl]);
+  }, [id]);
 
   if (loading) {
     return <Spinner />;
   }
-  console.log(animeEpisodesList);
+
+  console.log(videoUrl);
 
   return (
     <div>
       <ReactPlayer
-        url={videoUrl}
+        url={animeUrl}
         controls={true}
-        height={"100%"}
-        width={"100%"}
-        playsinline={true}
+        height='100%'
+        width='100%'
+        onReady={() =>
+          setAnimeUrl(
+            animeEpisodeUrl.filter((link) => link.quality === "default")
+          )
+        }
       />
       <br />
       <div className='dropdown'>
@@ -48,8 +62,13 @@ const Episode = () => {
         <ul className='dropdown-menu'>
           {Array.isArray(animeEpisodeUrl) ? (
             animeEpisodeUrl.map((qual) => (
-              <li>
-                <a className='dropdown-item'>{qual.quality}</a>
+              <li key={qual.quality}>
+                <a
+                  className='dropdown-item'
+                  onClick={() => setVideoUrl(qual.url)}
+                >
+                  {qual.quality}
+                </a>
               </li>
             ))
           ) : (
