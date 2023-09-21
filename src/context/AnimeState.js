@@ -41,7 +41,7 @@ const AnimeState = (props) => {
 
       getAnimeEpisodes(res.data.episodes);
     } catch (err) {
-      console.log(err.response.statusText);
+      console.log(err.message);
     }
   };
 
@@ -58,7 +58,7 @@ const AnimeState = (props) => {
         payload: res.data.results,
       });
     } catch (err) {
-      console.log(err.response.statusText);
+      console.log(err.message);
     }
   };
 
@@ -84,7 +84,7 @@ const AnimeState = (props) => {
         payload: res.data,
       });
     } catch (err) {
-      console.log(err.response);
+      console.log(err.message);
     }
   };
 

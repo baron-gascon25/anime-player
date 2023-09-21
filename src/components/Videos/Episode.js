@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Spinner from "../layout/Spinner";
 import ReactPlayer from "react-player";
 import AnimeContext from "../../context/AnimeContext";
+import { isCancel } from "axios";
 
 const Episode = () => {
   const animeContext = useContext(AnimeContext);
@@ -19,14 +20,17 @@ const Episode = () => {
 
   const { id } = useParams();
 
-  // const loadUrl = () => {
-
-  // };
-
   useEffect(() => {
+    let isCancelled = false;
     setAnimeEpisode(id);
-
-    //loadUrl();
+    if (!isCancelled) {
+      animeEpisodeUrl.filter(
+        (link) => link.quality === "default" && setVideoUrl(link.url.toString())
+      );
+    }
+    return () => {
+      isCancelled = true;
+    };
     // eslint-disable-next-line
   }, [id]);
 
@@ -39,15 +43,11 @@ const Episode = () => {
   return (
     <div>
       <ReactPlayer
-        url={animeUrl}
+        url={videoUrl}
         controls={true}
         height='100%'
         width='100%'
-        onReady={() =>
-          setAnimeUrl(
-            animeEpisodeUrl.filter((link) => link.quality === "default")
-          )
-        }
+        onReady={() => videoUrl}
       />
       <br />
       <div className='dropdown'>

@@ -1,8 +1,9 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import animeContext from "../../context/AnimeContext";
 
 const Searchbar = () => {
+  const navigate = useNavigate();
   const [input, setInput] = useState("");
   const AnimeContext = useContext(animeContext);
 
@@ -12,7 +13,9 @@ const Searchbar = () => {
 
   const searchAnime = (e) => {
     e.preventDefault();
+    console.log(input);
     AnimeContext.setAnimeList(input);
+    navigate("/list");
     setInput("");
   };
 
@@ -25,11 +28,10 @@ const Searchbar = () => {
         aria-label='Search'
         onChange={onSearch}
         value={input}
+        onKeyDown={(e) => e.key === "Enter" && searchAnime(e)}
       />
       <button className='btn btn-outline-success' onClick={searchAnime}>
-        <Link to='/list' style={{ textDecoration: "none" }}>
-          Search
-        </Link>
+        Search
       </button>
     </form>
   );

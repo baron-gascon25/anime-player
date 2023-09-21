@@ -13,8 +13,7 @@ const Home = () => {
     setText(e.target.value);
   };
 
-  const searchAnime = (e) => {
-    e.preventDefault();
+  const searchAnime = () => {
     if (text === "") {
       alertContext.setAlert("  Please enter an input", "danger");
     } else {
@@ -35,6 +34,7 @@ const Home = () => {
           placeholder='Search anime'
           aria-label='Search'
           onChange={onSearch}
+          onKeyDown={(e) => e.key === "Enter" && searchAnime()}
         />
         <button className='input-group-text' onClick={searchAnime}>
           <i className='bi bi-search' />
