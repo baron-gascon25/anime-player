@@ -11,6 +11,7 @@ import {
   CLEAR_URL,
   CLEAR_ANIME_URL,
   SET_LOADING,
+  SET_RECENT_ANIME,
 } from "./Types";
 
 const AnimeState = (props) => {
@@ -20,7 +21,7 @@ const AnimeState = (props) => {
     animeEpisodes: {},
     animeEpisodeUrl: [],
     animeUrl: "",
-    animeUrlList: {},
+    animeRecent: [],
     loading: false,
   };
 
@@ -88,6 +89,23 @@ const AnimeState = (props) => {
     }
   };
 
+  const setRecentAnime = async () => {
+    setLoading();
+
+    try {
+      const res = await axios.get(
+        "https://api.consumet.org/anime/gogoanime/recent-episodes"
+      );
+
+      dispatch({
+        type: SET_RECENT_ANIME,
+        payload: res.data.results,
+      });
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
   const setAnimeUrl = (url) => {
     dispatch({
       type: SET_URL,
@@ -119,6 +137,7 @@ const AnimeState = (props) => {
         animeList: state.animeList,
         animeEpisodes: state.animeEpisodes,
         animeEpisodeUrl: state.animeEpisodeUrl,
+        animeRecent: state.animeRecent,
         animeUrl: state.animeUrl,
         loading: state.loading,
         getAnime,
@@ -126,6 +145,7 @@ const AnimeState = (props) => {
         setAnimeList,
         clearAnimeUrl,
         setAnimeEpisode,
+        setRecentAnime,
         getAnimeEpisodes,
       }}
     >

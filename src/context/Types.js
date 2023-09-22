@@ -1,5 +1,6 @@
 export const GET_ANIME = "GET_ANIME";
 export const SET_ANIME_LIST = "SET_ANIME_LIST";
+export const SET_RECENT_ANIME = "SET_RECENT_ANIME";
 export const SET_ANIME_EPISODE = "SET_ANIME_EPISODE";
 export const GET_ANIME_EPISODES = "GET_ANIME_EPISODES";
 export const SEARCH_ANIME = "SEARCH_ANIME";

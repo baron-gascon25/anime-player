@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import Spinner from "../layout/Spinner";
 import ReactPlayer from "react-player";
 import AnimeContext from "../../context/AnimeContext";
-import { isCancel } from "axios";
 
 const Episode = () => {
   const animeContext = useContext(AnimeContext);
@@ -38,10 +37,14 @@ const Episode = () => {
     return <Spinner />;
   }
 
-  console.log(videoUrl);
-
   return (
     <div>
+      <div className='alert alert-warning' role='alert'>
+        <p>
+          I have yet to fix this problem, please select a quality to manually
+          load the video player.
+        </p>
+      </div>
       <ReactPlayer
         url={videoUrl}
         controls={true}

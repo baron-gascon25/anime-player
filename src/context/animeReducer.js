@@ -5,6 +5,7 @@ import {
   SET_LOADING,
   SET_URL,
   SET_ANIME_EPISODE,
+  SET_RECENT_ANIME,
   GET_ANIME_EPISODES,
   CLEAR_ANIME_URL,
 } from "./Types";
@@ -33,6 +34,12 @@ const animeReducer = (state, action) => {
       return {
         ...state,
         animeList: action.payload,
+        loading: false,
+      };
+    case SET_RECENT_ANIME:
+      return {
+        ...state,
+        animeRecent: action.payload,
         loading: false,
       };
     case SET_LOADING:

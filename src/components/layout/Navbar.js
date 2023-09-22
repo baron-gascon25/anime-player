@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import Searchbar from "./Searchbar";
+import animeContext from "../../context/AnimeContext";
 
 const Navbar = () => {
+  const AnimeContext = useContext(animeContext);
+
   return (
     <nav
       className='navbar navbar-expand-lg bg-dark'
@@ -30,7 +33,11 @@ const Navbar = () => {
               </Link>
             </li>
             <li className='nav-item'>
-              <Link to='/list' className='nav-link active'>
+              <Link
+                to='/recent'
+                className='nav-link active'
+                onClick={() => AnimeContext.setRecentAnime()}
+              >
                 Anime
               </Link>
             </li>

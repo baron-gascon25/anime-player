@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
-import animeContext from "../../context/AnimeContext";
 import Anime from "./Anime";
 import Spinner from "../layout/Spinner";
+import animeContext from "../../context/AnimeContext";
 
-const AnimeList = () => {
+const AnimeRecent = () => {
   const AnimeContext = useContext(animeContext);
 
-  const { loading, animeList } = AnimeContext;
+  const { loading, animeRecent } = AnimeContext;
 
   if (loading) {
     return <Spinner />;
@@ -14,10 +14,10 @@ const AnimeList = () => {
 
   return (
     <div>
-      <h4 className='mt-4'>Results</h4>
+      <h4 className='mt-4'>Recent</h4>
       <hr />
       <div className='row justify-content-center'>
-        {animeList.map((animes) => (
+        {animeRecent.map((animes) => (
           <Anime key={animes.id} animes={animes} />
         ))}
       </div>
@@ -25,4 +25,4 @@ const AnimeList = () => {
   );
 };
 
-export default AnimeList;
+export default AnimeRecent;
