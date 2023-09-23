@@ -33,7 +33,7 @@ const AnimeInfo = () => {
               style={imageStyle}
               alt='anime_image'
             ></img>
-            <p style={{ marginBottom: "0px" }}>
+            <p className='mb-0'>
               <span className='fw-semibold'>Release Date:</span>{" "}
               {animeInfo.releaseDate}
             </p>

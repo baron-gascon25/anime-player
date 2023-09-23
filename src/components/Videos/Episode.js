@@ -4,18 +4,13 @@ import Spinner from "../layout/Spinner";
 import ReactPlayer from "react-player";
 import AnimeContext from "../../context/AnimeContext";
 
+import "./Episode.css";
+
 const Episode = () => {
   const animeContext = useContext(AnimeContext);
   const [videoUrl, setVideoUrl] = useState("");
 
-  const {
-    animeEpisodeUrl,
-    loading,
-    animeUrl,
-    setAnimeUrl,
-    clearAnimeUrl,
-    setAnimeEpisode,
-  } = animeContext;
+  const { animeEpisodeUrl, loading, setAnimeEpisode } = animeContext;
 
   const { id } = useParams();
 
@@ -62,12 +57,13 @@ const Episode = () => {
         >
           Video Quality
         </button>
-        <ul className='dropdown-menu'>
+        <ul className='dropdown-menu bg-secondary' role='menu'>
           {Array.isArray(animeEpisodeUrl) ? (
             animeEpisodeUrl.map((qual) => (
-              <li key={qual.quality}>
+              <li>
                 <a
-                  className='dropdown-item'
+                  className='text-light dropdown-item li-a'
+                  href='#'
                   onClick={() => setVideoUrl(qual.url)}
                 >
                   {qual.quality}

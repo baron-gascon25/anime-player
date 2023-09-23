@@ -13,7 +13,6 @@ const Searchbar = () => {
 
   const searchAnime = (e) => {
     e.preventDefault();
-    console.log(input);
     AnimeContext.setAnimeList(input);
     navigate("/list");
     setInput("");
@@ -22,7 +21,7 @@ const Searchbar = () => {
   return (
     <form className='d-flex' role='search'>
       <input
-        className='form-control me-2'
+        className='form-control me-2 text-dark bg-light'
         type='search'
         placeholder='Search anime'
         aria-label='Search'
@@ -30,7 +29,7 @@ const Searchbar = () => {
         value={input}
         onKeyDown={(e) => e.key === "Enter" && searchAnime(e)}
       />
-      <button className='btn btn-outline-success' onClick={searchAnime}>
+      <button className='btn btn-secondary' onClick={searchAnime}>
         Search
       </button>
     </form>
