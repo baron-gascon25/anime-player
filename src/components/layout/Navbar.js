@@ -13,7 +13,7 @@ const Navbar = () => {
       style={{ marginBottom: "1.5rem" }}
     >
       <div className='container container-fluid'>
-        <p className='navbar-brand mb-0 h1'>AniPlayer</p>
+        <p className='navbar-brand m-2 h1'>AniPlayer</p>
         <button
           className='navbar-toggler'
           type='button'

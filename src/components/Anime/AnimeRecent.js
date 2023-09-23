@@ -24,8 +24,8 @@ const AnimeRecent = () => {
   }
 
   return (
-    <div className=''>
-      <h4 className='mt-4'>Recent Episode</h4>
+    <div>
+      <h4 className='m-2 mt-4'>Recent Episode</h4>
       <hr />
       <div className='row justify-content-center'>
         {currentPosts.map((animes) => (

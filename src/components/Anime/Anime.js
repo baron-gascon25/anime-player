@@ -12,7 +12,7 @@ const Anime = ({ animes: { id, title, image, episodeNumber } }) => {
             alt={id}
             className='card-image-top'
           />
-          <p className='card-title text-center text-dark text-wrap'>{title}</p>
+          <p className='card-title text-center text-dark  mb-0'>{title}</p>
           {episodeNumber && (
             <p className='text-dark text-center'>Episode: {episodeNumber}</p>
           )}

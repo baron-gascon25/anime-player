@@ -14,7 +14,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   };
 
   return (
-    <nav aria-label='Page navigation example'>
+    <nav aria-label='Page navigation'>
       <ul class='pagination justify-content-center'>
         <li class={page === 1 ? "page-item disabled" : "page-item"}>
           <a
