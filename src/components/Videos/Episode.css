@@ -11,3 +11,15 @@
   border-bottom: 1px solid #fff;
   text-decoration: none;
 }
+
+.li-c:focus,
+.li-c:hover {
+  background-color: darkgrey !important;
+  text-decoration: none;
+}
+
+.li-d:focus,
+.li-d:hover {
+  color: white !important;
+  text-decoration: none;
+}

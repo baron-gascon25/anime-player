@@ -17,25 +17,27 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 
 function App() {
   return (
-    <AnimeState>
-      <AlertState>
-        <Router>
-          <Fragment>
-            <Navbar />
-            <div className='container'>
-              <Alert />
-              <Routes>
-                <Route path='/' element={<Home />} />
-                <Route path='/list' element={<AnimeList />} />
-                <Route path='/recent' element={<AnimeRecent />} />
-                <Route path='/info/:id' element={<AnimeInfo />} />
-                <Route path='/episode/:id' element={<Episode />} />
-              </Routes>
-            </div>
-          </Fragment>
-        </Router>
-      </AlertState>
-    </AnimeState>
+    <div>
+      <AnimeState>
+        <AlertState>
+          <Router>
+            <Fragment>
+              <Navbar />
+              <div className='container'>
+                <Alert />
+                <Routes>
+                  <Route path='/' element={<Home />} />
+                  <Route path='/list' element={<AnimeList />} />
+                  <Route path='/recent' element={<AnimeRecent />} />
+                  <Route path='/info/:id' element={<AnimeInfo />} />
+                  <Route path='/episode/:id' element={<Episode />} />
+                </Routes>
+              </div>
+            </Fragment>
+          </Router>
+        </AlertState>
+      </AnimeState>
+    </div>
   );
 }
 

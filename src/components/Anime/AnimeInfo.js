@@ -26,22 +26,29 @@ const AnimeInfo = () => {
     <div>
       <div className='container'>
         <div className='row'>
-          <div className='col-xxl-2 clearfix'>
+          <div className='col-xxl-3 clearfix'>
             <img
               src={animeInfo.image}
               className='mx-auto d-block m-4'
               style={imageStyle}
               alt='anime_image'
             ></img>
-            <p className='mb-0'>
-              <span className='fw-semibold'>Release Date:</span>{" "}
-              {animeInfo.releaseDate}
-            </p>
-            <p>
-              <span className='fw-semibold'>Status:</span> {animeInfo.status}
-            </p>
+            <div className='m-2'>
+              <p className='mb-0'>
+                <span className='fw-semibold'>Release Date:</span>{" "}
+                {animeInfo.releaseDate}
+              </p>
+              <p className='mb-0'>
+                <span className='fw-semibold'>Status:</span> {animeInfo.status}
+              </p>
+              <p>
+                <span className='fw-semibold'>Genre:</span>{" "}
+                {Array.isArray(animeInfo.genres) &&
+                  animeInfo.genres.map((genre) => genre + ", ")}
+              </p>
+            </div>
           </div>
-          <div className='col-xxl-10'>
+          <div className='col-xxl-9'>
             <br />
             <h4>{animeInfo.title}</h4>
             <br />
@@ -52,7 +59,7 @@ const AnimeInfo = () => {
       <div className='container'>
         <hr />
         <h5>Episodes</h5>
-        <div className={episodeStyle}>
+        <div className='mt-3 row'>
           {Array.isArray(animeEpisodes) ? (
             animeEpisodes.map((episode) => (
               <Episodes key={episode.number} episode={episode} />
@@ -70,12 +77,6 @@ const imageStyle = {
   height: "300px",
   width: "200px",
   marginBottom: "10px",
-};
-
-const episodeStyle = {
-  display: "grid",
-  gridTemplateColumns: "repeat(3, 1fr)",
-  gridGap: "1rem",
 };
 
 export default AnimeInfo;
