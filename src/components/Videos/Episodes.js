@@ -8,7 +8,7 @@ const Episodes = ({ episode: { id } }) => {
         className='text-decoration-none li-d text-light opacity-75'
         to={`/episode/${id}`}
       >
-        <h6>{id}</h6>
+        <h6 className='mb-2 mt-2'>{id}</h6>
       </Link>
     </div>
   );

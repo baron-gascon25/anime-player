@@ -1,6 +1,6 @@
 .li-a:focus,
 .li-a:hover {
-  color: dimgrey !important;
+  color: white !important;
   text-decoration: none;
 }
 

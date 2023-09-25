@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Spinner from "../layout/Spinner";
 import ReactPlayer from "react-player";
 import AnimeContext from "../../context/AnimeContext";
@@ -10,18 +10,27 @@ const Episode = () => {
   const animeContext = useContext(AnimeContext);
   const [videoUrl, setVideoUrl] = useState("");
   const [state, setState] = useState(true);
+  const navigate = useNavigate();
 
-  const { animeEpisodeUrl, loading, setAnimeEpisode, setAnimeUrl } =
-    animeContext;
+  const {
+    animeInfo,
+    getAnime,
+    animeEpisodeUrl,
+    loading,
+    setAnimeUrl,
+    setAnimeEpisode,
+    animeEpisodes,
+  } = animeContext;
 
   const { id } = useParams();
 
   useEffect(() => {
     let isCancelled = false;
+    getAnime(animeInfo.id);
     setAnimeEpisode(id);
     if (isCancelled === false) {
       animeEpisodeUrl.filter(
-        (link) => link.quality === "default" && setAnimeUrl(link.url)
+        (link) => link.quality === "default" && setAnimeUrl(link.url.toString())
       );
     }
     return () => {
@@ -61,32 +70,85 @@ const Episode = () => {
         onReady={() => videoUrl}
       />
       <br />
-      <div className='dropdown'>
-        <button
-          className='btn btn-secondary dropdown-toggle'
-          type='button'
-          data-bs-toggle='dropdown'
-          aria-expanded='false'
-        >
-          Video Quality
-        </button>
-        <ul className='dropdown-menu bg-secondary' role='menu'>
-          {Array.isArray(animeEpisodeUrl) ? (
-            animeEpisodeUrl.map((qual) => (
-              <li key={qual.quality}>
-                <a
-                  className='text-light dropdown-item li-a'
-                  href='#'
-                  onClick={() => setVideoUrl(qual.url)}
-                >
-                  {qual.quality}
-                </a>
-              </li>
-            ))
-          ) : (
-            <p>No other qualities</p>
-          )}
-        </ul>
+      <div className='card d-flex flex-row p-2 justify-content-center'>
+        <div className='dropdown flex-fill text-center'>
+          <button
+            className='btn dropdown-toggle'
+            type='button'
+            data-bs-toggle='dropdown'
+            aria-expanded='false'
+          >
+            Episodes
+          </button>
+          <ul className='dropdown-menu bg-secondary' role='menu'>
+            {Array.isArray(animeEpisodes) ? (
+              animeEpisodes.map((ep) => (
+                <li key={ep.id}>
+                  <button
+                    className='text-secondary-emphasis dropdown-item li-a'
+                    style={{ background: "none" }}
+                    onClick={() => {
+                      getAnime(
+                        ep.number > 9
+                          ? ep.id.slice(0, ep.id.length - 11)
+                          : ep.id.slice(0, ep.id.length - 10)
+                      );
+                      setAnimeEpisode(ep.id);
+                      navigate(`/episode/${ep.id}`);
+                    }}
+                  >
+                    {`Episode ${ep.number}`}
+                  </button>
+                </li>
+              ))
+            ) : (
+              <p>No other episodes</p>
+            )}
+          </ul>
+        </div>
+        <div className='vr' />
+        <div className='dropdown flex-fill text-center'>
+          <button
+            className='btn dropdown-toggle'
+            type='button'
+            data-bs-toggle='dropdown'
+            aria-expanded='false'
+          >
+            Video Quality
+          </button>
+          <ul className='dropdown-menu bg-secondary' role='menu'>
+            {Array.isArray(animeEpisodeUrl) ? (
+              animeEpisodeUrl.map((qual) => (
+                <li key={qual.quality}>
+                  <button
+                    className='text-secondary-emphasis dropdown-item li-a'
+                    onClick={() => setVideoUrl(qual.url)}
+                    style={{ background: "none" }}
+                  >
+                    {qual.quality}
+                  </button>
+                </li>
+              ))
+            ) : (
+              <p>No other qualities</p>
+            )}
+          </ul>
+        </div>
+      </div>
+      <div className='d-flex'>
+        <img
+          src={animeInfo.image}
+          className='mt-3'
+          style={{ height: "100px", width: "auto" }}
+          alt='anime_img'
+        />
+        <div className='m-3'>
+          <h6>{animeInfo.title}</h6>
+          <p>
+            {id.replace(`${animeInfo.id}-`, "").charAt(0).toUpperCase() +
+              id.replace(`${animeInfo.id}-e`, "").replace("-", " ")}
+          </p>
+        </div>
       </div>
     </div>
   );

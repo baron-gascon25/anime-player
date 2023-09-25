@@ -33,7 +33,7 @@ const AnimeInfo = () => {
               style={imageStyle}
               alt='anime_image'
             ></img>
-            <div className='m-2'>
+            <div className='mb-2'>
               <p className='mb-0'>
                 <span className='fw-semibold'>Release Date:</span>{" "}
                 {animeInfo.releaseDate}
@@ -52,7 +52,7 @@ const AnimeInfo = () => {
           <div className='col-xxl-9'>
             <br />
             <h4>{animeInfo.title}</h4>
-            <h6 className='mt-3 opacity-50'>{animeInfo.otherName}</h6>
+            <h6 className='mt-3 opacity-75'>{animeInfo.otherName}</h6>
             <br />
             <p>{animeInfo.description}</p>
           </div>
