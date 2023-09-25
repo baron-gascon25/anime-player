@@ -32,6 +32,7 @@ function App() {
                   <Route path='/info/:id' element={<AnimeInfo />} />
                   <Route path='/episode/:id' element={<Episode />} />
                 </Routes>
+                <br />
               </div>
             </Fragment>
           </Router>

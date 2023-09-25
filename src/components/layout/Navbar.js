@@ -25,7 +25,10 @@ const Navbar = () => {
         >
           <span className='navbar-toggler-icon'></span>
         </button>
-        <div className='collapse navbar-collapse' id='navbarSupportedContent'>
+        <div
+          className='collapse navbar-collapse m-2'
+          id='navbarSupportedContent'
+        >
           <ul className='navbar-nav me-auto mb-2 mb-lg-0' role='menu'>
             <li className='nav-item'>
               <Link to='/' className='nav-link li-b' aria-current='page'>

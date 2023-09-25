@@ -43,14 +43,16 @@ const AnimeInfo = () => {
               </p>
               <p>
                 <span className='fw-semibold'>Genre:</span>{" "}
-                {Array.isArray(animeInfo.genres) &&
-                  animeInfo.genres.map((genre) => genre + ", ")}
+                {Array.isArray(animeInfo.genres) && animeInfo.genres.length > 1
+                  ? animeInfo.genres.map((genre) => genre + ", ")
+                  : animeInfo.genres}
               </p>
             </div>
           </div>
           <div className='col-xxl-9'>
             <br />
             <h4>{animeInfo.title}</h4>
+            <h6 className='mt-3 opacity-50'>{animeInfo.otherName}</h6>
             <br />
             <p>{animeInfo.description}</p>
           </div>

@@ -1,11 +1,13 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import animeContext from "../../context/AnimeContext";
+import alertContext from "../../context/alert/AlertContext";
 
 const Searchbar = () => {
   const navigate = useNavigate();
   const [input, setInput] = useState("");
   const AnimeContext = useContext(animeContext);
+  const AlertContext = useContext(alertContext);
 
   const onSearch = (e) => {
     setInput(e.target.value);
@@ -13,9 +15,13 @@ const Searchbar = () => {
 
   const searchAnime = (e) => {
     e.preventDefault();
-    AnimeContext.setAnimeList(input);
-    navigate("/list");
-    setInput("");
+    if (input !== "") {
+      AnimeContext.setAnimeList(input);
+      navigate("/list");
+      setInput("");
+    } else {
+      AlertContext.setAlert("  Please enter an input", "danger");
+    }
   };
 
   return (

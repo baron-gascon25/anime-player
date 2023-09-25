@@ -1,14 +1,12 @@
 .li-a:focus,
 .li-a:hover {
   color: dimgrey !important;
-  border-bottom: 1px solid #fff;
   text-decoration: none;
 }
 
 .li-b:focus,
 .li-b:hover {
   color: white !important;
-  border-bottom: 1px solid #fff;
   text-decoration: none;
 }
 

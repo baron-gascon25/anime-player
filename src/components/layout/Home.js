@@ -23,10 +23,11 @@ const Home = () => {
   };
 
   return (
-    <div className='m-5'>
-      <h3 className='text-center lh-lg'>
+    <div className='m-5' style={{ height: "75vh" }}>
+      <h3 className='text-center lh-lg'>AniPlayer - Watch Anime Online</h3>
+      <h5 className='text-center lh-lg'>
         Find and discover countless of anime shows to watch!
-      </h3>
+      </h5>
       <div className='input-group input-group-lg mt-5'>
         <input
           className='form-control'
