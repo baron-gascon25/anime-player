@@ -50,7 +50,7 @@ const animeReducer = (state, action) => {
     case SET_URL:
       return {
         ...state,
-        animeUrl: action.payload.map((link) => link.url),
+        animeUrl: action.payload,
       };
     case CLEAR_URL:
       return {

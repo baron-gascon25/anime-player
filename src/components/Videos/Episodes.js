@@ -5,7 +5,7 @@ const Episodes = ({ episode: { id } }) => {
   return (
     <div className='col-xxl-4 mt-3 li-c'>
       <Link
-        className='text-decoration-none li-d text-dark opacity-75'
+        className='text-decoration-none li-d text-light opacity-75'
         to={`/episode/${id}`}
       >
         <h6>{id}</h6>

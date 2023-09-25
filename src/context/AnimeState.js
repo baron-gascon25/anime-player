@@ -20,7 +20,7 @@ const AnimeState = (props) => {
     animeList: [],
     animeEpisodes: {},
     animeEpisodeUrl: [],
-    animeUrl: "",
+    animeUrl: [],
     animeRecent: [],
     loading: false,
   };

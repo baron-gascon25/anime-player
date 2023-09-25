@@ -8,7 +8,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className='navbar navbar-expand-lg bg-dark'
+      className='navbar navbar-expand-lg bg-dark-subtle'
       data-bs-theme='dark'
       style={{ marginBottom: "1.5rem" }}
     >

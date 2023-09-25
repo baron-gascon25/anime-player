@@ -10,11 +10,13 @@ const Anime = ({ animes: { id, title, image, episodeNumber } }) => {
             src={image}
             style={imageStyle}
             alt={id}
-            className='card-image-top'
+            className='card-image-top mb-1'
           />
-          <p className='card-title text-center text-dark mb-0'>{title}</p>
+          <p className='card-title text-center text-light mb-0'>{title}</p>
           {episodeNumber && (
-            <p className='text-dark text-center'>Episode: {episodeNumber}</p>
+            <p className='text-light opacity-75 text-center'>
+              Episode: {episodeNumber}
+            </p>
           )}
         </Link>
       </div>

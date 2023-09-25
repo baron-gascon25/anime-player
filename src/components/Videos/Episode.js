@@ -9,17 +9,19 @@ import "./Episode.css";
 const Episode = () => {
   const animeContext = useContext(AnimeContext);
   const [videoUrl, setVideoUrl] = useState("");
+  const [state, setState] = useState(true);
 
-  const { animeEpisodeUrl, loading, setAnimeEpisode } = animeContext;
+  const { animeEpisodeUrl, loading, setAnimeEpisode, setAnimeUrl } =
+    animeContext;
 
   const { id } = useParams();
 
   useEffect(() => {
     let isCancelled = false;
     setAnimeEpisode(id);
-    if (!isCancelled) {
+    if (isCancelled === false) {
       animeEpisodeUrl.filter(
-        (link) => link.quality === "default" && setVideoUrl(link.url.toString())
+        (link) => link.quality === "default" && setAnimeUrl(link.url)
       );
     }
     return () => {
@@ -34,11 +36,22 @@ const Episode = () => {
 
   return (
     <div>
-      <div className='alert alert-warning' role='alert'>
-        <p>
-          I have yet to fix this problem, please select a quality to manually
-          load the video player.
+      <div
+        className={`d-flex justify-content-between ${
+          state ? alertShow : alertHide
+        }`}
+        role='alert'
+      >
+        <p className='mb-0'>
+          Please select a quality to manually load the video player.
         </p>
+        <button
+          className='mb-0'
+          style={{ background: "none", border: "none" }}
+          onClick={() => setState(false)}
+        >
+          <i className='bi bi-x' />
+        </button>
       </div>
       <ReactPlayer
         url={videoUrl}
@@ -60,7 +73,7 @@ const Episode = () => {
         <ul className='dropdown-menu bg-secondary' role='menu'>
           {Array.isArray(animeEpisodeUrl) ? (
             animeEpisodeUrl.map((qual) => (
-              <li>
+              <li key={qual.quality}>
                 <a
                   className='text-light dropdown-item li-a'
                   href='#'
@@ -78,5 +91,8 @@ const Episode = () => {
     </div>
   );
 };
+
+const alertHide = "alert alert-warning visually-hidden";
+const alertShow = "alert alert-warning";
 
 export default Episode;
