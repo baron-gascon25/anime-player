@@ -8,12 +8,14 @@ const Navbar = () => {
 
   return (
     <nav
-      className='navbar navbar-expand-lg bg-dark-subtle'
+      className='navbar navbar-expand-lg bg-dark-subtle sticky-top'
       data-bs-theme='dark'
       style={{ marginBottom: "1.5rem" }}
     >
       <div className='container container-fluid'>
-        <p className='navbar-brand m-2 h1'>AniPlayer</p>
+        <a className='navbar-brand m-2 h1' href='/'>
+          AniPlayer
+        </a>
         <button
           className='navbar-toggler'
           type='button'

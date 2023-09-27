@@ -21,3 +21,14 @@
   color: white !important;
   text-decoration: none;
 }
+
+.a-card:focus,
+.a-card:hover {
+  background-color: grey !important;
+  text-decoration: none;
+}
+
+.dropdown-menu {
+  max-height: 400px;
+  overflow-y: scroll;
+}

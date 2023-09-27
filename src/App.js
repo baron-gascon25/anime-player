@@ -17,7 +17,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 
 function App() {
   return (
-    <div>
+    <div className='vh-100'>
       <AnimeState>
         <AlertState>
           <Router>

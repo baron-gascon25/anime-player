@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import Anime from "./Anime";
 import Spinner from "../layout/Spinner";
 import Pagination from "../layout/Pagination";
