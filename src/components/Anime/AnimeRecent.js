@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Anime from "./Anime";
 import Spinner from "../layout/Spinner";
 import Pagination from "../layout/Pagination";
@@ -9,7 +9,7 @@ const AnimeRecent = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(8);
 
-  const { loading, animeRecent } = AnimeContext;
+  const { loading, animeRecent, setRecentAnime } = AnimeContext;
 
   // Get current posts
   const indexOfLastPost = currentPage * postsPerPage;
@@ -18,6 +18,11 @@ const AnimeRecent = () => {
 
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  useEffect(() => {
+    setRecentAnime();
+    //eslint-disable-next-line
+  }, []);
 
   if (loading) {
     return <Spinner />;

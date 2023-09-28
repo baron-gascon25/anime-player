@@ -1,4 +1,5 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import animeContext from "../../context/AnimeContext";
 import Anime from "./Anime";
 import Pagination from "../layout/Pagination";
@@ -9,7 +10,8 @@ const AnimeList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(8);
 
-  const { loading, animeList } = AnimeContext;
+  const text = useParams();
+  const { loading, animeList, setAnimeList } = AnimeContext;
 
   // Get current posts
   const indexOfLastPost = currentPage * postsPerPage;
@@ -19,13 +21,18 @@ const AnimeList = () => {
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  useEffect(() => {
+    setAnimeList(text.id);
+    //eslint-disable-next-line
+  }, [text]);
+
   if (loading) {
     return <Spinner />;
   }
 
   return (
     <div>
-      <h4 className='m-2 mt-4'>Results</h4>
+      <h4 className='m-2 mt-4'>Results for "{text.id}"</h4>
       <hr />
       <div className='row justify-content-center'>
         {currentPosts.map((animes) => (

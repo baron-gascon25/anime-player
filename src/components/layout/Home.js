@@ -1,12 +1,10 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AnimeContext from "../../context/AnimeContext";
 import AlertContext from "../../context/alert/AlertContext";
 
 const Home = () => {
   const navigate = useNavigate();
   const [text, setText] = useState("");
-  const animeContext = useContext(AnimeContext);
   const alertContext = useContext(AlertContext);
 
   const onSearch = (e) => {
@@ -17,8 +15,7 @@ const Home = () => {
     if (text === "") {
       alertContext.setAlert("  Please enter an input", "danger");
     } else {
-      animeContext.setAnimeList(text);
-      navigate("/list");
+      navigate(`/list/${text}`);
     }
   };
 

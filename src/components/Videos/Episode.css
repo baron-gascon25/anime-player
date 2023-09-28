@@ -22,10 +22,14 @@
   text-decoration: none;
 }
 
+.a-card {
+  transition: 0.25s;
+}
+
 .a-card:focus,
 .a-card:hover {
-  background-color: grey !important;
   text-decoration: none;
+  transform: scale(1.1);
 }
 
 .dropdown-menu {

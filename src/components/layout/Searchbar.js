@@ -1,24 +1,21 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import animeContext from "../../context/AnimeContext";
 import alertContext from "../../context/alert/AlertContext";
 
 const Searchbar = () => {
   const navigate = useNavigate();
-  const [input, setInput] = useState("");
-  const AnimeContext = useContext(animeContext);
+  const [text, setText] = useState("");
   const AlertContext = useContext(alertContext);
 
   const onSearch = (e) => {
-    setInput(e.target.value);
+    setText(e.target.value);
   };
 
   const searchAnime = (e) => {
     e.preventDefault();
-    if (input !== "") {
-      AnimeContext.setAnimeList(input);
-      navigate("/list");
-      setInput("");
+    if (text !== "") {
+      navigate(`/list/${text}`);
+      setText("");
     } else {
       AlertContext.setAlert("  Please enter an input", "danger");
     }
@@ -32,7 +29,7 @@ const Searchbar = () => {
         placeholder='Search anime'
         aria-label='Search'
         onChange={onSearch}
-        value={input}
+        value={text}
         onKeyDown={(e) => e.key === "Enter" && searchAnime(e)}
       />
       <button className='btn btn-secondary' onClick={searchAnime}>

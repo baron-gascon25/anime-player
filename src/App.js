@@ -27,7 +27,7 @@ function App() {
                 <Alert />
                 <Routes>
                   <Route path='/' element={<Home />} />
-                  <Route path='/list' element={<AnimeList />} />
+                  <Route path='/list/:id' element={<AnimeList />} />
                   <Route path='/recent' element={<AnimeRecent />} />
                   <Route path='/info/:id' element={<AnimeInfo />} />
                   <Route path='/episode/:id' element={<Episode />} />
