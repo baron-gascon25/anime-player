@@ -152,17 +152,21 @@ const Episode = () => {
           </button>
           <ul className='dropdown-menu bg-secondary' role='menu'>
             {Array.isArray(animeEpisodeUrl) ? (
-              animeEpisodeUrl.map((qual) => (
-                <li key={qual.quality}>
-                  <button
-                    className='text-secondary-emphasis dropdown-item li-a'
-                    onClick={() => setVideoUrl(qual.url)}
-                    style={{ background: "none" }}
-                  >
-                    {qual.quality}
-                  </button>
-                </li>
-              ))
+              loading ? (
+                <Spinner />
+              ) : (
+                animeEpisodeUrl.map((qual) => (
+                  <li key={qual.quality}>
+                    <button
+                      className='text-secondary-emphasis dropdown-item li-a'
+                      onClick={() => setVideoUrl(qual.url)}
+                      style={{ background: "none" }}
+                    >
+                      {qual.quality}
+                    </button>
+                  </li>
+                ))
+              )
             ) : (
               <p>No other qualities</p>
             )}

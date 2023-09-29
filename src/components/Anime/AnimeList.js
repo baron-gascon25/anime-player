@@ -35,9 +35,15 @@ const AnimeList = () => {
       <h4 className='m-2 mt-4'>Results for "{text.id}"</h4>
       <hr />
       <div className='row justify-content-center'>
-        {currentPosts.map((animes) => (
-          <Anime key={animes.id} animes={animes} />
-        ))}
+        {animeList.length > 0 ? (
+          currentPosts.map((animes) => (
+            <Anime key={animes.id} animes={animes} />
+          ))
+        ) : (
+          <h6 className='fs-5 mt-4 ms-3'>
+            No available results for {text.id} ...
+          </h6>
+        )}
       </div>
       <br />
       <Pagination

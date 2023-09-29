@@ -76,7 +76,6 @@ const AnimeInfo = () => {
 const imageStyle = {
   height: "300px",
   width: "200px",
-  marginBottom: "10px",
 };
 
 export default AnimeInfo;
