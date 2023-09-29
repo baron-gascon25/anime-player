@@ -17,24 +17,19 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
     <nav aria-label='Page navigation'>
       <ul className='pagination justify-content-center'>
         <li className={page === 1 ? "page-item disabled" : "page-item"}>
-          <a
+          <button
             className='page-link'
             onClick={() => changePage(page - 1)}
-            href='#'
             aria-label='Previous'
           >
             <span aria-hidden='true'>&laquo;</span>
-          </a>
+          </button>
         </li>
         {pageNumbers.map((number) => (
           <li key={number} className='page-item'>
-            <a
-              onClick={() => changePage(number)}
-              className='page-link'
-              href='#'
-            >
+            <button onClick={() => changePage(number)} className='page-link'>
               {number}
-            </a>
+            </button>
           </li>
         ))}
         <li
@@ -44,14 +39,13 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
               : "page-item"
           }
         >
-          <a
+          <button
             className='page-link'
             onClick={() => changePage(page + 1)}
-            href='#'
             aria-label='Next'
           >
             <span aria-hidden='true'>&raquo;</span>
-          </a>
+          </button>
         </li>
       </ul>
     </nav>
