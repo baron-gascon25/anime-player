@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import Spinner from "../layout/Spinner";
 import ReactPlayer from "react-player";
 import AnimeContext from "../../context/AnimeContext";
@@ -89,9 +89,9 @@ const Episode = () => {
         </button>
       </div>
       <div className='d-flex flex-row'>
-        <a href={`/info/${animeInfo.id}`} className='text-secondary'>
+        <Link to={`/info/${animeInfo.id}`} className='text-secondary'>
           <i className='bi bi-caret-left-square me-2' />
-        </a>
+        </Link>
         <h5 className='me-2'>
           {animeInfo.title} -{" "}
           <span className='opacity-75'>
