@@ -43,7 +43,7 @@ const Navbar = () => {
                 className='nav-link li-b'
                 onClick={() => AnimeContext.setRecentAnime()}
               >
-                Recent
+                Anime
               </Link>
             </li>
           </ul>
