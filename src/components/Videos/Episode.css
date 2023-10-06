@@ -36,3 +36,7 @@
   max-height: 400px;
   overflow-y: scroll;
 }
+
+.t-hover:hover {
+  opacity: 100% !important;
+}

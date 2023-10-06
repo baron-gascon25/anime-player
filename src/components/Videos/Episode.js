@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Spinner from "../layout/Spinner";
 import ReactPlayer from "react-player";
 import AnimeContext from "../../context/AnimeContext";
@@ -10,7 +10,6 @@ const Episode = () => {
   const animeContext = useContext(AnimeContext);
   const [videoUrl, setVideoUrl] = useState("");
   const [clicked, setClicked] = useState(false);
-  const [state, setState] = useState(true);
   const navigate = useNavigate();
 
   const {
@@ -18,29 +17,23 @@ const Episode = () => {
     getAnime,
     animeEpisodeUrl,
     loading,
-    setAnimeUrl,
     setAnimeEpisode,
     animeEpisodes,
   } = animeContext;
 
   const { id } = useParams();
 
+  const initInfo = async () => {
+    await getAnime(idSlice(id));
+    await setAnimeEpisode(id);
+  };
+
   useEffect(() => {
-    let isCancelled = false;
-    setState(true);
     setVideoUrl("");
     if (!clicked) {
-      getAnime(idSlice(id));
-      setAnimeEpisode(id);
+      setVideoUrl("");
+      initInfo();
     }
-    if (!isCancelled) {
-      animeEpisodeUrl.filter(
-        (link) => link.quality === "default" && setAnimeUrl(link.url.toString())
-      );
-    }
-    return () => {
-      isCancelled = true;
-    };
     // eslint-disable-next-line
   }, [id]);
 
@@ -55,7 +48,7 @@ const Episode = () => {
   };
 
   const idSlice = (id) => {
-    var number = parseInt(id.replace(/\D/g, ""));
+    let number = parseInt(id.replace(/\D/g, ""));
     if (number < 9) {
       return id.slice(0, id.length - 10);
     } else if (number > 9) {
@@ -65,47 +58,96 @@ const Episode = () => {
     }
   };
 
+  const findNextIndex = () => {
+    let number = parseInt(id.replace(/\D/g, ""));
+    const index =
+      Array.isArray(animeEpisodes) &&
+      animeEpisodes.findIndex(
+        (episode) => episode.id === `${animeInfo.id}-episode-${number + 1}`
+      );
+    return index;
+  };
+
+  const findPrevIndex = () => {
+    let number = parseInt(id.replace(/\D/g, ""));
+    const index =
+      Array.isArray(animeEpisodes) &&
+      animeEpisodes.findIndex(
+        (episode) => episode.id === `${animeInfo.id}-episode-${number - 1}`
+      );
+    return index;
+  };
+
+  const nextep = () => {
+    if (findNextIndex() === -1) {
+      console.log("none");
+    } else {
+      navigate(`/episode/${animeEpisodes[findNextIndex()].id}`);
+    }
+  };
+
+  const prevep = () => {
+    if (findPrevIndex() === -1) {
+      console.log("none");
+    } else {
+      navigate(`/episode/${animeEpisodes[findPrevIndex()].id}`);
+    }
+  };
+
+  const setDefault = () => {
+    let index = "";
+    try {
+      index =
+        Array.isArray(animeEpisodeUrl) &&
+        animeEpisodeUrl.filter((episode) => episode.quality === "default");
+      return index[0].url;
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   if (loading) {
     return <Spinner />;
   }
 
+  console.log(setDefault());
+
   return (
     <div className='container'>
-      <div
-        className={`d-flex justify-content-between ${
-          state ? alertShow : alertHide
-        }`}
-        role='alert'
+      <a
+        className='me-2 mb-3 h4 text-decoration-none'
+        href={`/#/info/${animeInfo.id}`}
       >
-        <p className='mb-0'>
-          Please select a quality to load the video player.
-        </p>
-        <button
-          className='mb-0'
-          style={{ background: "none", border: "none" }}
-          onClick={() => setState(false)}
-        >
-          <i className='bi bi-x' />
-        </button>
-      </div>
-      <div className='d-flex flex-row'>
-        <Link to={`/info/${animeInfo.id}`} className='text-secondary'>
-          <i className='bi bi-caret-left-square me-2' />
-        </Link>
-        <h5 className='me-2'>
-          {animeInfo.title} -{" "}
-          <span className='opacity-75'>
-            {id.replace(`${animeInfo.id}-episode-`, "")}
-          </span>
-        </h5>
+        {animeInfo.title} -{" "}
+        {"Episode " + id.replace(`${animeInfo.id}-episode-`, "")}
+      </a>
+      <div className='d-flex justify-content-between align-items-center mt-3'>
+        <div className='opacity-75 t-hover' onClick={prevep}>
+          <i className='bi bi-caret-left-square me-2 text-light ' />
+          <button
+            className='me-auto'
+            style={{ background: "none", border: "none" }}
+          >
+            {"Previous Episode "}
+          </button>
+        </div>
+        <div className='opacity-75 t-hover' onClick={nextep}>
+          <button
+            className='ms-auto'
+            style={{ background: "none", border: "none" }}
+          >
+            {"Next Episode "}
+          </button>
+          <i className='bi bi-caret-right-square ms-2 text-light ' />
+        </div>
       </div>
       <ReactPlayer
         className='mt-3 mx-auto'
-        url={videoUrl}
+        url={!loading && videoUrl === "" ? setDefault() : videoUrl}
         controls={true}
         height='100%'
         width='100%'
-        onReady={() => videoUrl}
+        onReady={() => (!loading && videoUrl === "" ? setDefault() : videoUrl)}
       />
       <div className='card d-flex flex-row p-2 mt-3 justify-content-center'>
         <div className='dropdown flex-fill text-center'>
@@ -129,6 +171,7 @@ const Episode = () => {
                       getAnime(epSlice(ep));
                       setAnimeEpisode(ep.id);
                       navigate(`/episode/${ep.id}`);
+                      setClicked(false);
                     }}
                   >
                     {`Episode ${ep.number}`}
@@ -176,8 +219,5 @@ const Episode = () => {
     </div>
   );
 };
-
-const alertHide = "alert alert-warning visually-hidden";
-const alertShow = "alert alert-warning";
 
 export default Episode;
