@@ -50,19 +50,25 @@ const Episode = () => {
   };
 
   const idSlice = (id) => {
-    let removeSeason = null;
-    if (id.match() === null) {
-      removeSeason = id;
+    if (id.match(/season/g) === null) {
+      let number = parseInt(id.replace(/\D/g, ""));
+      if (number < 9) {
+        return id.slice(0, id.length - 10);
+      } else if (number > 9) {
+        return id.slice(0, id.length - 11);
+      } else if (number > 99) {
+        return id.slice(0, id.length - 12);
+      }
     } else {
-      removeSeason = id.replace(/-season-\d+/g, "");
-    }
-    let number = parseInt(removeSeason.replace(/\D/g, ""));
-    if (number < 9) {
-      return id.slice(0, id.length - 10);
-    } else if (number > 9) {
-      return id.slice(0, id.length - 11);
-    } else if (number > 99) {
-      return id.slice(0, id.length - 12);
+      let removeSeason = id.replace(/-season-\d+/g, "");
+      let number = parseInt(removeSeason.replace(/\D/g, ""));
+      if (number < 9) {
+        return id.slice(0, id.length - 10);
+      } else if (number > 9) {
+        return id.slice(0, id.length - 11);
+      } else if (number > 99) {
+        return id.slice(0, id.length - 12);
+      }
     }
   };
 
