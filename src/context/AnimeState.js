@@ -32,7 +32,7 @@ const AnimeState = (props) => {
 
     try {
       const res = await axios.get(
-        `https://api.consumet.org/anime/gogoanime/info/${query}`
+        `https://animxer-api-cvxg.vercel.app/anime/gogoanime/info/${query}`
       );
 
       dispatch({
@@ -51,7 +51,7 @@ const AnimeState = (props) => {
 
     try {
       const res = await axios.get(
-        `https://api.consumet.org/anime/gogoanime/${query}`
+        `https://animxer-api-cvxg.vercel.app/anime/gogoanime/${query}`
       );
 
       dispatch({
@@ -77,7 +77,7 @@ const AnimeState = (props) => {
 
     try {
       const res = await axios.get(
-        `https://api.consumet.org/anime/gogoanime/watch/${query}?server=gogocdn`
+        `https://animxer-api-cvxg.vercel.app/anime/gogoanime/watch/${query}?server=gogocdn`
       );
 
       dispatch({
@@ -94,7 +94,7 @@ const AnimeState = (props) => {
 
     try {
       const res = await axios.get(
-        "https://api.consumet.org/anime/gogoanime/recent-episodes"
+        "https://animxer-api-cvxg.vercel.app/anime/gogoanime/recent-episodes"
       );
 
       dispatch({
